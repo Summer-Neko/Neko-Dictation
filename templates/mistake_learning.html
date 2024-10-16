@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>词汇学习</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mistake_learning.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div id="chapter-selection">
+            <h1>目前所有测试的错误词汇</h1>
+            <h2>请选择章节开始吧</h2>
+            <div id="chapter-list" class="grid-container"></div>
+            <button id="select-all" disabled>一键全选</button>
+            <button id="start-quiz" disabled>开始学习</button>
+        </div>
+        <div id="quiz-container" style="display: none;">
+            <!-- Progress bar section -->
+            <div id="progress-bar-container">
+                <div id="progress-bar"></div>
+                <span id="progress-text"></span>
+            </div>
+            <!-- Word display and options -->
+            <h1 id="word-display"></h1>
+            <div id="question-container"></div>
+            <div id="options-container"></div>
+            <button id="next-question" disabled>下一题</button>
+        </div>
+        <div id="result-container" style="display: none;">
+            <h1>学习结果</h1>
+            <canvas id="result-chart"></canvas>
+            <div id="result-summary"></div>
+            <button id="retry-quiz">重新学习</button>
+            <button id="return-home">返回首页</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/mistake_learning.js') }}"></script>
+</body>
+</html>

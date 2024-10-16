@@ -1,0 +1,628 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #ff6347;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 85%;
+    height: 400px; /* 固定卡片高度 */
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+    border: 2px solid #ddd; /* 添加边框 */
+}
+
+/* 让卡片内容在内部滚动 */
+.card ul {
+    max-height: calc(100% - 80px); /* 减去顶部和底部的 padding */
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* 自定义滚动条 */
+.card ul::-webkit-scrollbar {
+    width: 6px;
+}
+
+.card ul::-webkit-scrollbar-thumb {
+    background-color: #4a90e2;
+    border-radius: 10px;
+}
+
+.card ul::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+/* 动态效果 */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+    overflow: visible; /* 确保父元素不会剪切子元素 */
+}
+
+.card-header h3 {
+    color: #4a90e2;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 1.7em;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-header h3:hover {
+    color: #357ABD;
+    transform: translateY(-2px);
+}
+
+p{
+    color: #aaa;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 1em;
+    position: relative;
+}
+h4{
+    color:#FF6F61;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1.5em;
+}
+h4:hover{
+    transform: translateY(-2px);
+    color:#FF6F99;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.card img {
+    max-width: 150px;
+    max-height: 150px;
+    margin-right: 10px;
+    border-radius: 8px;
+    transition: transform 0.3s;
+    object-fit: cover;
+}
+
+.photo-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.photo-item img {
+    cursor: pointer;
+    border-radius: 8px;
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: cover;
+}
+
+.rating-info {
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    opacity: 0.8;
+}
+
+.rating-info.S { color: #ff4500; }
+.rating-info.A { color: #ffb300; }
+.rating-info.B { color: #32cd32; }
+.rating-info.C { color: #00bfff; }
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+textarea {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: calc(100% - 20px);
+    margin: 10px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.upload-form {
+    margin-top: 10px;
+}
+
+.upload-button, .submit-button, .delete-button {
+    background-color: #32cd32;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin: 5px;
+}
+
+.upload-button:hover, .submit-button:hover, .delete-button:hover {
+    background-color: #28a745;
+    transform: scale(1.05);
+}
+
+.open-ielts-button {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    background-color: #32cd32;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    z-index: 1000;
+}
+
+.open-ielts-button:hover {
+    background-color: #28a745;
+    transform: scale(1.05);
+}
+
+.open-modal-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #32cd32;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    z-index: 1000;
+}
+
+.open-modal-button:hover {
+    background-color: #28a745;
+    transform: scale(1.05);
+}
+
+.remove-task {
+    background-color: #ff4500;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.remove-task:hover {
+    background-color: #ff6347;
+}
+
+textarea {
+    width: 95%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    resize: none;
+    background-color: #f9f9f9;
+}
+
+textarea:focus {
+    border-color: #32cd32;
+    outline: none;
+}
+
+.feedback {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #ffebcd;
+    border-left: 5px solid #ffa07a;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* 浮窗样式 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    margin: 10% auto;
+    padding: 20px;
+    width: 80%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.close-button {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 浮窗样式 */
+#task-modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#task-modal .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+#task-modal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#task-modal .close-button {
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#task-modal .close-button:hover {
+    color: black;
+}
+
+#task-modal input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    resize: none;
+    background-color: #f9f9f9;
+}
+
+#task-modal input[type="text"]:focus {
+    border-color: #32cd32;
+    outline: none;
+}
+
+/* 照片鼠标移上效果 */
+.photo-container img {
+    border-radius: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.photo-container img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* 关闭按钮 */
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+
+
+/* 卡片头部，用于评分和标题 */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+.rating-text {
+    position: absolute;
+    top: -12%;
+    right: -11.5%; /* 可以根据实际需要调整这个值来偏移 */
+    transform-origin: right center;
+    line-height: 1;
+    font-weight: bold;
+    z-index: 0;
+    font-size:38em;
+    opacity: 0.24; /* 设置透明度，使字母不占据太多视觉空间 */
+    pointer-events: none; /* 保证不会挡住其他操作 */
+    color: inherit; /* 确保继承父元素的颜色 */
+    white-space: nowrap; /* 防止折行 */
+}
+
+.rating-S {
+    color: #FF6B6B; /* 红色 */
+}
+
+.rating-A {
+    color: #FFD700; /* 金色 */
+}
+
+.rating-B {
+    color: #4682B4; /* 蓝色 */
+}
+
+.rating-C {
+    color: #A9A9A9; /* 灰色 */
+}
+
+.rating-N {
+    color: #D3D3D3; /* 浅灰色，表示无评分 */
+}
+
+/* 反馈部分 */
+.feedback-section {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* 按钮样式 */
+.submit-button, .delete-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+.delete-button {
+    background-color: #f44336;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #da190b;
+}
+
+/* 照片鼠标移上效果 */
+.photo-container img {
+    border-radius: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.photo-container img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* 浮窗样式 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+/* 关闭按钮 */
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover, .close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+ul {
+    list-style-type: none; /* 移除小圆点 */
+    padding-left: 0; /* 移除左侧内边距 */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.task-add-button {
+   background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 20px;
+}
+
+.task-add-button:hover {
+    background-color: #357ABD;
+    transform: translateY(-2px);
+}
+
+img.lazy {
+    filter: blur(5px);
+    transition: filter 0.3s;
+}
+
+img.lazy:not([src]) {
+    visibility: hidden;
+}
+
+img:not(.lazy) {
+    filter: blur(0);
+}
+
+/* 图片浏览器样式 */
+.photo-viewer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.photo-viewer.hidden {
+    display: none;
+    opacity: 0;
+}
+
+.photo-viewer-content {
+    max-width: 80%; /* 最大宽度为窗口的80% */
+    max-height: 100%; /* 最大高度为窗口的80% */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.photo-viewer-content img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+}
+
+.photo-viewer img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: background-color 0.3s, border 0.3s;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+
+.nav-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 50px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    user-select: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+
+}
+
+#prev-photo {
+    left: 20px;
+    font-size: 8em;
+}
+
+#next-photo {
+    right: 20px;
+    font-size: 8em;
+}

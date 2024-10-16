@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Score Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ielts.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <!-- 侧边栏 -->
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="#" onclick="showSection('overview')">Overview</a></li>
+            <li><a href="#" onclick="toggleSubMenu('trend')">Trend</a></li>
+            <ul id="trend-submenu" class="submenu" style="display: none;">
+                <li><a href="#" onclick="showAndScrollToChart('total-trend')">Overall Score</a></li>
+                <li><a href="#" onclick="showAndScrollToChart('listening-trend')">Listening</a></li>
+                <li><a href="#" onclick="showAndScrollToChart('reading-trend')">Reading</a></li>
+                <li><a href="#" onclick="showAndScrollToChart('writing-trend')">Writing</a></li>
+                <li><a href="#" onclick="showAndScrollToChart('speaking-trend')">Speaking</a></li>
+            </ul>
+            <li><a href="#" onclick="showSection('enter-scores')">Enter Scores</a></li>
+            <li><a href="#" onclick="showSection('set-targets')">Set Targets</a></li>
+            <li><a href="#" onclick="showSection('ielts-scores')">IELTS Scores</a></li>
+        </ul>
+    </div>
+
+    <!-- 主内容区域 -->
+    <div class="main-content">
+        <!-- 概览 -->
+        <div id="overview" class="section">
+            <h2>Overview</h2>
+            <div id="score-summary">
+                <p>Target Scores: {{ targets.total_target }}</p>
+                <div>
+                    <h3>Current Gap:</h3>
+                    <p>{{ current_gap_text }}</p>
+                </div>
+                <div>
+                    <h3>Predicted Final Score:</h3>
+                    <p>{{ predicted_score }}</p>
+                </div>
+                <div>
+                    <h3>Best Performing Subject:</h3>
+                    <p>{{ best_subject }}</p>
+                </div>
+                <div>
+                    <h3>Subjects to Focus On:</h3>
+                    <p>{{ focus_subject }}</p>
+                </div>
+            </div>
+            <canvas id="overviewChart"></canvas>
+        </div>
+
+        <!-- 各科目趋势图 -->
+        <div id="total-trend" class="section" style="display: none;">
+            <h2>Ovarall Score Trend</h2>
+            <canvas id="totalScoreChart"></canvas>
+        </div>
+
+        <div id="listening-trend" class="section" style="display: none;">
+            <h2>Listening Trend</h2>
+            <canvas id="listeningTrendChart"></canvas>
+        </div>
+
+        <div id="reading-trend" class="section" style="display: none;">
+            <h2>Reading Trend</h2>
+            <canvas id="readingTrendChart"></canvas>
+        </div>
+
+        <div id="writing-trend" class="section" style="display: none;">
+            <h2>Writing Trend</h2>
+            <canvas id="writingTrendChart"></canvas>
+        </div>
+
+        <div id="speaking-trend" class="section" style="display: none;">
+            <h2>Speaking Trend</h2>
+            <canvas id="speakingTrendChart"></canvas>
+        </div>
+
+        <!-- 成绩录入部分 -->
+        <div id="enter-scores" class="section" style="display: none;">
+            <h2>Enter IELTS Scores</h2>
+            <form id="scoreForm">
+                <label>Listening Correct Answers (0-40):</label>
+                <input type="number" name="listening_correct" min="0" max="40" required><br>
+
+                <label>Reading Correct Answers (0-40):</label>
+                <input type="number" name="reading_correct" min="0" max="40" required><br>
+
+                <label>Writing Score (increments of 0.5):</label>
+                <input type="number" step="0.5" min="1" max="9" name="writing_score" required><br>
+
+                <label>Speaking Score (increments of 0.5):</label>
+                <input type="number" step="0.5" min="1" max="9" name="speaking_score" required><br>
+
+                <button type="submit">Submit Scores</button>
+            </form>
+        </div>
+
+        <!-- 目标分数设置部分 -->
+        <div id="set-targets" class="section" style="display: none;">
+            <h2>Set IELTS Target Scores</h2>
+            <form id="targetForm">
+                <label>Listening Target:</label>
+                <input type="number" step="0.5" name="listening_target" value="{{ targets.listening_target }}" required><br>
+
+                <label>Reading Target:</label>
+                <input type="number" step="0.5" name="reading_target" value="{{ targets.reading_target }}" required><br>
+
+                <label>Writing Target:</label>
+                <input type="number" step="0.5" name="writing_target" value="{{ targets.writing_target }}" required><br>
+
+                <label>Speaking Target:</label>
+                <input type="number" step="0.5" name="speaking_target" value="{{ targets.speaking_target }}" required><br>
+
+                <label>Overall Score Target:</label>
+                <input type="number" step="0.5" name="total_target" value="{{ targets.total_target }}" required><br>
+
+                <button type="submit">Set Targets</button>
+            </form>
+        </div>
+
+        <!-- IELTS 分数展示部分 -->
+        <div id="ielts-scores" class="section" style="display: none;">
+            <h2>IELTS Scores</h2>
+            <div id="score-cards">
+                {% for score in scores %}
+                <div class="score-card {{ score_color(score.total_score) }}">
+                    <p>{{ score.test_date }}</p>
+                    <p>Listening: <span class="{{ score_color(score.listening_score) }}">{{ score.listening_score }}</span> |
+                        Reading: <span class="{{ score_color(score.reading_score) }}">{{ score.reading_score }}</span> |
+                        Writing: <span class="{{ score_color(score.writing_score) }}">{{ score.writing_score }}</span> |
+                        Speaking: <span class="{{ score_color(score.speaking_score) }}">{{ score.speaking_score }}</span> |
+                        Overall: <span class="{{ score_color(score.total_score) }}">{{ score.total_score }}</span>
+                    </p>
+                    <button onclick="deleteScore('{{ score.test_date }}')">Delete</button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/ielts.js') }}"></script>
+
+</body>
+</html>

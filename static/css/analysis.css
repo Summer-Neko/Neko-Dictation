@@ -1,0 +1,215 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+}
+
+.container {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+h1 {
+    color: #ff6f61;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(90deg, #ff6f61, #ff944d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h2 {
+    color: #4a90e2;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 1.7em;
+    position: relative;
+}
+
+canvas {
+    width: 100%;
+    max-width: 700px;
+    margin-bottom: 20px;
+}
+
+#analysis-charts {
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+    font-size: 1.2em;
+}
+
+ul li {
+    margin: 10px 0;
+    background-color: #e3f2fd; /* 柔和的淡蓝色 */
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+ul li:hover {
+    background-color: #bbdefb; /* 更深的蓝色 */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.error-details {
+    padding: 10px;
+    background-color: #bbdefb;
+    border-radius: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+    transition: height 0.3s ease, opacity 0.3s ease, padding 0.3s ease, margin 0.3s ease;
+    height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    border-width: 0;
+}
+
+.error-details.visible {
+    height: auto;
+    opacity: 1;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    border-width: 1px;
+}
+
+button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #357ABD;
+    transform: translateY(-2px);
+}
+
+.chart-title {
+    font-size: 1.3em;
+    color: #4a90e2;
+    font-weight: bold;
+    position: relative;
+}
+
+.help-icon {
+    font-size: 1.1em; /* 缩小图标大小 */
+    cursor: pointer;
+    margin-left: 6px;
+    color: #888; /* 使用较淡的灰色 */
+    transition: color 0.3s ease, opacity 0.3s ease;
+    position: relative;
+    opacity: 0.7; /* 初始状态降低透明度 */
+}
+
+.help-icon:hover {
+    color: #666; /* 鼠标悬停时稍微加深颜色 */
+    opacity: 1; /* 悬停时增加透明度 */
+}
+
+.tooltip {
+    position: absolute;
+    background-color: #fff5f5;
+    color: #333;
+    padding: 6px 10px;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+    z-index: 1000;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 0;
+    transform: translateY(10px);
+    left: 110%;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 0.9em;
+}
+
+.help-icon:hover .tooltip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+.tooltip::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -6px;
+    transform: translateY(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent #fff5f5 transparent transparent;
+}
+
+#data-summary p {
+    transition: opacity 0.6s ease-in-out;
+}
+
+button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 20px;
+    position: fixed;  /* 设置为固定定位 */
+    bottom: 20px;     /* 距离页面底部20px */
+    right: 20px;      /* 距离页面右侧20px */
+    z-index: 1000;    /* 确保按钮在页面上方 */
+}
+
+button:hover {
+    background-color: #357ABD;
+    transform: translateY(-2px);
+}
+
+/* 为页面内容留出空间，避免按钮遮挡 */
+.container {
+    padding-bottom: 80px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

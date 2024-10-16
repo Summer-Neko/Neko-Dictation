@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>词汇学习</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/word_learning.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <button class="home-button" onclick="location.href='/'">返回首页</button>
+            <button class="test-button" onclick="window.open('/listening_quiz', '_blank')">听选练习</button>
+            <button class="test-button" onclick="window.open('/mistake_learning')">错误词汇练习</button>
+            <button class="test-button" onclick="window.open('/latest_errors')">错误章节学习</button>
+            <h2>选择章节</h2>
+            <ul id="chapter-list">
+                <!-- 章节选择内容将动态生成 -->
+            </ul>
+        </div>
+
+        <div class="content">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="搜索单词..." />
+            </div>
+            <h1>词汇学习</h1>
+            <div id="word-grid">
+                <!-- 章节词汇将动态生成 -->
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/word_learning.js') }}"></script>
+</body>
+</html>

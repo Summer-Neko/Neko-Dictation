@@ -1,0 +1,27 @@
+{% extends 'dateBase.html' %}
+
+{% block content %}
+<h2>Add New Task</h2>
+<form action="{{ url_for('add_task') }}" method="POST" enctype="multipart/form-data">
+    <label for="date">Date:</label>
+    <input type="date" name="date" id="date" required>
+    <label for="task">Task:</label>
+    <input type="text" name="task" id="task" required>
+    <label for="image">Upload Image:</label>
+    <input type="file" name="image" id="image">
+    <button type="submit">Add Task</button>
+</form>
+
+<h2>Scheduled Tasks</h2>
+<ul>
+    {% for schedule in schedules %}
+        <li>
+            <p>Date: {{ schedule.date }}</p>
+            <p>Task: {{ schedule.task }}</p>
+            {% if schedule.image_path %}
+                <img src="{{ url_for('static', filename='images/' ~ schedule.image_path.split('/')[-1]) }}" alt="Task Image" class="task-image">
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

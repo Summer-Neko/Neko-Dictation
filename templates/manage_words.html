@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单词管理</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/manage_words.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div id="progress-bar"></div>
+        <h1>单词管理</h1>
+        <div class="management-container">
+            <!-- 章节列表 -->
+            <div class="section chapters">
+                <h2>章节</h2>
+                <ul id="chapter-list"></ul>
+                <button id="add-chapter-btn">添加章节</button>
+            </div>
+
+            <!-- 小节列表 -->
+            <div class="section sections">
+                <h2>小节</h2>
+                <ul id="section-list"></ul>
+                <button id="add-section-btn">添加小节</button>
+            </div>
+
+            <!-- 单词列表 -->
+            <div class="section words">
+                <h2>单词</h2>
+                <ul id="word-list"></ul>
+                <input type="text" id="add-word-input" placeholder="快速添加单词...">
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button onclick="saveChanges()">保存更改</button>
+            <button onclick="location.href='/'">返回首页</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/manage_words.js') }}"></script>
+</body>
+</html>

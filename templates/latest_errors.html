@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>章节错误词汇学习</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/latest_errors.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <h2>章节导航</h2>
+        <ul id="chapter-list">
+            {% for chapter in chapters %}
+            <li>
+                <a href="#chapter-{{ chapter.chapter_index }}" class="chapter-link" data-chapter="{{ chapter.chapter_index }}">{{ chapter.chapter_name }}</a>
+                <ul class="section-list">
+                    {% for section in chapter.sections %}
+                    <li><a href="#section-{{ chapter.chapter_index }}-{{ section.section_index }}" class="section-link" data-chapter="{{ chapter.chapter_index }}" data-section="{{ section.section_index }}">{{ section.section_name }}  {{ section.section_accuracy }}%</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="error-toggle" id="errorToggle">显示错误回答</div>
+        <div class="meaning-toggle" id="meaningToggle">隐藏中文释义</div>
+        <!-- 导出单词按钮 -->
+        <button class="export-button" onclick="window.open('/temp_test')">单词听写测试</button>
+        <button id="exportWordsBtn" class="export-button">导出单词</button>
+        <div class="test-info-toggle">信息</div>
+        <div class="test-info-content">
+            <!-- 动态生成测试信息 -->
+            <p>小节来源，原则上是最新的测试的小节</p>
+            {% for chapter in chapters %}
+            {% for section in chapter.sections %}
+            <p>{{ chapter.chapter_name }} - {{ section.section_name }}: {{ section.timestamp }}</p>
+            {% endfor %}
+            {% endfor %}
+        </div>
+        <button class="close-button" onclick="window.close()">关闭</button>
+    </div>
+
+    <div class="content">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="搜索单词..." />
+        </div>
+
+        <!-- 导出单词选择章节的浮窗 -->
+        <div id="exportModal" class="modal">
+            <div class="modal-content">
+                <span class="close-buttons" id="closeExportModal">&times;</span>
+                <h3>选择要导出的章节</h3>
+                <form id="exportForm">
+                    {% for chapter in chapters %}
+                    <div class="chapter-checkbox">
+                        <input type="checkbox" id="chapter-{{ chapter.chapter_index }}" name="chapters" value="{{ chapter.chapter_index }}">
+                        <label for="chapter-{{ chapter.chapter_index }}">{{ chapter.chapter_name }}</label>
+                    </div>
+                    {% endfor %}
+                    <p class="warning-text">短语将被剔除，仅导出单词。可导入不背单词中使用。</p>
+                    <button type="submit" class="submit-button">导出</button>
+                </form>
+            </div>
+        </div>
+
+        {% for chapter in chapters %}
+        {% for section in chapter.sections %}
+        <div id="section-{{ chapter.chapter_index }}-{{ section.section_index }}" class="section-content" data-chapter="{{ chapter.chapter_index }}" data-section="{{ section.section_index }}">
+            <h3>{{ chapter.chapter_name }} - {{ section.section_name }} (正确率: {{ section.section_accuracy }}%)</h3>
+            <div class="word-grid">
+                {% for error in section.errors %}
+                <div class="word-item show-meaning">
+                    <strong>{{ error.correct_word }}</strong>
+                    <div class="word-meaning">{{ error.meaning }}</div>
+                    <div class="word-error">{{ error.user_answer }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/latest_errors.js') }}"></script>
+
+</body>
+</html>

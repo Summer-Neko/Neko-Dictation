@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Dictation Test</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>开始测试</h1>
+        <div id="timer" class="timer">00:00</div> <!-- 计时器显示区域 -->
+        <div id="test-form">
+            <!-- 动态生成表单 -->
+        </div>
+        <button id="submit-btn">提交</button>
+        <button onclick="location.href='/'">返回首页</button>
+    </div>
+    <div id="results"></div>
+    <script src="{{ url_for('static', filename='js/test.js') }}"></script>
+</body>
+</html>

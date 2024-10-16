@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>日程管理界面</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/schedule.css') }}">
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #ff6f61;
+            color: white;
+            border-radius: 8px;
+        }
+
+        .welcome-message {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+
+        .logout-button {
+            background-color: white;
+            color: #ff6f61;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background-color: #ffe6e0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Welcome Message and Logout Button -->
+     <button class="open-ielts-button" onclick="window.open('/ielts_page')">Score</button>
+    <div class="header">
+        <div class="welcome-message">
+            欢迎, {{ current_user.username }}!
+        </div>
+        <form action="{{ url_for('logout') }}" method="post">
+            <button type="submit" class="logout-button">退朝</button>
+        </form>
+    </div>
+
+    <h1>需审理的奏文</h1>
+    <ul>
+        {% for schedule in schedules %}
+        <li>
+            <div class="card">
+                <div class="card-header">
+                    <h3>{{ schedule.date.strftime('%Y-%m-%d') }}</h3>
+                    <div class="rating-text rating-{{ schedule.rating if schedule.rating else 'N' }}">
+                        {{ schedule.rating if schedule.rating else 'N' }}
+                    </div>
+                </div>
+                <ul>
+                    {% for task in schedule.tasks %}
+                    <li>
+                        <p>{{ loop.index }}. {{ task.content }}{% if task.completed_at %} - 完成时间是 {{ task.completed_at.strftime('%Y-%m-%d %H:%M:%S') }} 喵{% endif %}</p>
+                        <div class="photo-container">
+                            {% for photo in task.photos %}
+                            <img data-src="{{ url_for('static', filename='uploads/' ~ photo.filename) }}" alt="Photo" class="lazy" onclick="viewPhoto(this)">
+                            {% endfor %}
+                        </div>
+                    </li>
+                    {% endfor %}
+                    {% if not schedule.is_locked %}
+                    <form action="{{ url_for('admin') }}" method="post" class="rating-form">
+                        <input type="hidden" name="schedule_id" value="{{ schedule.id }}">
+                        <label for="rating-{{ schedule.id }}">评分:</label>
+                        <select id="rating-{{ schedule.id }}" name="rating" class="rating-select">
+                            <option value="S" class="rating-S">S</option>
+                            <option value="A" class="rating-A">A</option>
+                            <option value="B" class="rating-B">B</option>
+                            <option value="C" class="rating-C">C</option>
+                        </select>
+                        <br>
+                        <label for="feedback-{{ schedule.id }}">建议喵:</label>
+                        <textarea id="feedback-{{ schedule.id }}" name="feedback" class="feedback-textarea"></textarea>
+                        <br>
+                        <button type="submit" class="submit-button">已阅，批！</button>
+                    </form>
+                    {% endif %}
+                    {% if schedule.is_locked %}
+                    <div class="feedback-section">
+                        <h4>评语: {{ schedule.feedback }}</h4>
+                    </div>
+                    {% endif %}
+                    <form action="{{ url_for('delete_schedule', schedule_id=schedule.id) }}" method="post" class="delete-form">
+                        <button type="submit" class="delete-button">这个日程不行！驳回！</button>
+                    </form>
+                </ul>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <div id="photo-viewer" class="photo-viewer hidden">
+        <div class="photo-viewer-content">
+            <img src="" alt="Photo" id="photo-viewer-img">
+            <div class="navigation">
+                <button id="prev-photo" class="nav-button">&lt;</button>
+                <button id="next-photo" class="nav-button">&gt;</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</body>
+</html>

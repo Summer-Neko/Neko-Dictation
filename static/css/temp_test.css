@@ -1,0 +1,217 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* 整体容器样式调整 */
+.container {
+    width: 90%;
+    max-width: 700px; /* 扩大容器宽度 */
+    background-color: #ffffff;
+    border-radius: 16px; /* 调整边角半径 */
+    padding: 30px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.test-header h1 {
+    font-size: 24px;
+    color: #ff6f61;
+}
+
+.test-header p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.upload-btn {
+    background-color: #ff6f61;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.upload-btn input[type="file"] {
+    display: none;
+}
+
+.file-info {
+    margin-top: 15px;
+}
+
+.file-info.hidden {
+    display: none;
+}
+
+.test-body.hidden {
+    display: none;
+}
+
+.test-progress {
+    margin-bottom: 15px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0;
+    background-color: #ff6f61;
+    transition: width 0.3s ease;
+}
+
+.test-card {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    height: 300px; /* 固定高度 */
+    overflow: hidden; /* 隐藏超出部分 */
+}
+
+.question-scroll-container {
+    height: 100%; /* 滚动区域的高度 */
+    overflow-y: auto; /* 允许上下滚动 */
+}
+
+.test-controls .btn.hidden {
+    display: none;
+}
+
+/* 提交按钮在最后一题时浮现 */
+.test-controls .btn.floating {
+    display: block;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.test-controls .btn.floating.show {
+    opacity: 1;
+}
+
+.test-result {
+    max-height: 500px; /* 设置报告界面的最大高度 */
+    overflow-y: auto; /* 当内容超出时，允许滚动 */
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.test-result.hidden {
+    display: none;
+}
+
+.result-summary {
+    margin-bottom: 20px;
+}
+
+.result-summary p {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.pie-chart-container {
+    width: 200px;
+    margin: 0 auto;
+}
+/* 修改错误单词列表区域，确保能够完全显示并滚动 */
+.result-details {
+    max-height: 300px; /* 调整最大高度，确保足够显示内容 */
+    overflow-y: auto; /* 当内容超出时，允许滚动 */
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.result-details ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.result-details ul li {
+    background-color: #ffe6e6;
+    margin-bottom: 8px;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    word-break: break-word; /* 如果单词过长，允许换行 */
+}
+
+#restart-test {
+    background-color: #4CAF50;
+    margin-top: 20px;
+}
+
+
+/* 修改输入框样式 */
+.question-box input {
+    width: 80%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 2px solid #ff6f61;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.6s ease, box-shadow 0.6s ease;
+}
+
+/* 聚焦时的输入框样式 */
+.question-box input:focus {
+    border-color: #ff3d35;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+    outline: none; /* 移除默认的边框 */
+}
+
+/* 提交按钮样式 */
+.test-controls .btn {
+    background-color: #ff6f61;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.6s ease, box-shadow 0.6s ease;
+}
+
+/* 鼠标悬停时的提交按钮样式 */
+.test-controls .btn:hover {
+    background-color: #ff3d34;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 鼠标点击时的提交按钮样式 */
+.test-controls .btn:active {
+    background-color: #e0352f;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.hidden {
+    display: none;
+}

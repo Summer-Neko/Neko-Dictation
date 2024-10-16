@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据分析</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/analysis.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>数据小结</h1>
+        <div id="data-summary">
+            <!-- 数据总结 -->
+        </div>
+        <div id="analysis-charts">
+            <div class="chart-section" style="margin-top: 40px;">
+                <h2 class="chart-title">
+                    小节正确率对比
+                    <span class="help-icon">i
+                        <span class="tooltip">此图显示最近6次全测试中各小节的正确率对比。</span>
+                    </span>
+                </h2>
+                <canvas id="section-comparison-chart"></canvas>
+            </div>
+            <div class="chart-section" style="margin-top: 40px;">
+                <h2 class="chart-title">
+                    小节正确率趋势
+                    <span class="help-icon">i
+                        <span class="tooltip">选择一个小节查看其正确率趋势（最近10次测试数据）。</span>
+                    </span>
+                </h2>
+                <select id="section-select">
+                    <option value="">请选择一个小节</option>
+                </select>
+                <canvas id="section-trend-chart" style="display:none; margin-top: 20px;"></canvas>
+            </div>
+            <div class="chart-section" style="margin-top: 40px;">
+                <h2 class="chart-title">
+                    目前小节正确率
+                    <span class="help-icon">i
+                        <span class="tooltip">此图展示听力测试中最新的每个小节的正确率。</span>
+                    </span>
+                </h2>
+                <canvas id="section-accuracy-bar-chart"></canvas>
+            </div>
+            <div class="chart-section">
+                <h2 class="chart-title">
+                    每次测试总正确率
+                    <span class="help-icon">i
+                        <span class="tooltip">此图显示最近6次全测试的总体正确率。</span>
+                    </span>
+                </h2>
+                <canvas id="accuracy-chart"></canvas>
+            </div>
+            <div class="chart-section" style="margin-top: 40px;">
+                <h2 class="chart-title">
+                    章节正确率对比
+                    <span class="help-icon">i
+                        <span class="tooltip">此图显示最近6次全测试中各章的正确率对比。</span>
+                    </span>
+                </h2>
+                <canvas id="chapter-comparison-chart"></canvas>
+            </div>
+            <div class="chart-section" style="margin-top: 40px;">
+                <h2 class="chart-title">
+                    错误单词排行
+                    <span class="help-icon">i
+                        <span class="tooltip">此列表仅显示在听力测试中错误单词及其错误次数。</span>
+                    </span>
+                </h2>
+                <ul id="error-ranking-list">
+                    <!-- 错误排行列表 -->
+                </ul>
+            </div>
+        </div>
+        <button onclick="location.href='/'">返回首页</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/analysis.js') }}"></script>
+</body>
+</html>

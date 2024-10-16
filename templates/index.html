@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neko Dictation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Neko Dictation</h1>
+            <!-- 倒计时区域 -->
+            <div class="countdown-container" onclick="showCountdownModal()">
+                <h2 id="countdown-message">还没有设置倒计时哦~ 点击这里设置！</h2>
+                <span id="countdown-number" class="countdown-number"></span>
+            </div>
+        <div class="home-options">
+            <button onclick="location.href='/test?mode=all'">按顺序全测试喵</button>
+            <button onclick="location.href='/test?mode=custom'">自定义小节测试喵</button>
+            <button onclick="location.href='/word_learning'">词汇学习</button>
+            <button onclick="location.href='/analysis'">数据分析</button>
+            <button class="test-button" onclick="window.open('/create_schedule')">日程表</button>
+            <button class="test-button" onclick="window.open('/admin')">日程审核</button>
+        </div>
+
+        <h2>最近测试结果喵</h2>
+        <div class="results" data-results='{{ results|tojson }}'>
+            <!-- 渲染结果将插入这里 -->
+        </div>
+    </div>
+    <div id="countdown-modal" class="modal">
+
+            <span class="close" onclick="hideCountdownModal()">&times;</span>
+            <h2>设置倒计时信息喵~</h2>
+            <input type="text" id="countdown-event-input" placeholder="活动名称">
+            <input type="date" id="countdown-date-input">
+            <button onclick="saveCountdown()">保存</button>
+
+    </div>
+    <!-- 浮动窗口 -->
+    <div id="details-container" class="details-container">
+    <div id="loading-spinner" class="spinner"></div>
+    <div id="details-content" class="details-content">
+        <!-- 详细信息将插入这里 -->
+    </div>
+    <div class="button-group">
+        <button onclick="hideDetails()">关闭</button>
+        <button id="openPageBtn">在新页面查看</button>
+    </div>
+</div>
+
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>

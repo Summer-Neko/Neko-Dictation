@@ -1,0 +1,141 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f4ff;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    background-color: #005f99;
+    color: white;
+    padding: 20px;
+    width: 250px;
+    height: 100%;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #0077cc;
+}
+
+.submenu {
+    margin-left: 15px;
+}
+
+.animated-slide {
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.main-content {
+    flex: 1;
+    padding: 40px;
+    background-color: #f9fbff;
+    overflow-y: auto;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+button {
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #005f99;
+}
+
+canvas {
+    width: 100% !important;
+    height: 400px !important;
+}
+
+/* 调整卡片颜色和渐变效果 */
+.score-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #f0f4ff, #e0e7ff);
+    transition: background 0.5s ease;
+}
+
+.score-card:hover {
+    background: linear-gradient(135deg, #dce6ff, #ccd6ff);
+}
+
+/* 分数低于 5.0 的红色卡片 */
+.score-card.red {
+    background: linear-gradient(135deg, #ffcccc, #ff6666);
+}
+
+/* 分数低于 6.0 的灰色卡片 */
+.score-card.gray {
+    background: linear-gradient(135deg, #e0e0e0, #b3b3b3);
+}
+
+/* 6.0-6.5 的蓝色卡片 */
+.score-card.blue {
+    background: linear-gradient(135deg, #cce5ff, #99ccff);
+}
+
+/* 7.0 及以上的金色替代色（更现代的黄色） */
+.score-card.gold {
+    background: linear-gradient(135deg, #ffeb99, #ffd700);
+}
+
+.score-card p {
+    font-size: 14px;
+    color: #333;
+}
+
+.score-card span {
+    font-weight: bold;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temp Test</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/temp_test.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>开始测试吧</h1>
+        <div class="test-header">
+            <p id="upload-instructions">请选择你上传的单词文件，开始自定义测试</p>
+            <label class="upload-btn" id="upload-label">
+                上传单词文件
+                <input type="file" id="fileInput" accept=".txt">
+            </label>
+            <div id="file-info" class="file-info hidden">
+                <p>文件已加载：<span id="file-name">未选择文件</span></p>
+            </div>
+        </div>
+
+        <div class="test-body hidden">
+            <div class="test-progress">
+                <p>正在测试 <span id="current-question">1</span> / <span id="total-questions">0</span></p>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" id="progress-bar-fill"></div>
+                </div>
+            </div>
+
+            <!-- 题目滚动区域 -->
+            <div class="test-card">
+                <div class="question-scroll-container" id="question-scroll-container">
+                    <!-- 题目将通过JS动态添加 -->
+                </div>
+            </div>
+
+            <div class="test-controls">
+                <button id="submit-test" class="btn hidden">提交测试</button>
+            </div>
+        </div>
+
+        <div class="test-result hidden">
+            <h2>测试完成！</h2>
+            <p>注意：本数据并不保存</p>
+            <div class="result-summary">
+                <p>正确率: <span id="accuracy-percentage">0%</span></p>
+                <div class="pie-chart-container">
+                    <canvas id="result-pie-chart"></canvas>
+                </div>
+            </div>
+            <div class="result-details">
+                <h3>错误单词列表:</h3>
+            <ul id="error-list"></ul> <!-- 错误单词列表 -->
+            </div>
+            <button id="restart-test" class="btn">再试一次</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/temp_test.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
