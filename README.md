@@ -1,10 +1,11 @@
 # Neko - Dictation
 验证码：**wenpeng**
+项目在左边的发行（release）里。下载最新的直接解压就好了。
 
 ## 如果不需要部署到云，直接本地运行即可。
 
 
-## 部署 Neko-Dictation 到云
+## 部署 Neko-Dictation 到云服务器
 
 以下步骤将以阿里云服务器（ECS）为例，指导如何将Neko-Dictation 项目部署到阿里云服务器（ECS），并且购买域名，将其绑定到服务器的 IP 地址。
 
