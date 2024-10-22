@@ -10,7 +10,7 @@
 以下步骤将以阿里云服务器（ECS）为例，指导如何将Neko-Dictation 项目部署到阿里云服务器（ECS），并且购买域名，将其绑定到服务器的 IP 地址。
 
 ### 1. **准备工作**
-- **打包后的项目下载链接**：`https://github.com/Summer-Neko/Neko-Dictation/releases/download/Neko-Dictation/Neko-Dictation.V1.0.zip`
+- **打包后的项目下载链接**：`https://github.com/Summer-Neko/Neko-Dictation/releases/download/Neko-Dictationv1.0/Neko-DictationV1.0.zip`
 - **你可能还需要上传activation文件到你的云服务器对应目录**
 - **阿里云服务器（ECS）**：确保你已经购买并启动了阿里云的 ECS 实例，并有公网 IP 地址。（新用户有三个月，建议选在**香港**。）
 - **SSH 工具**：用于连接到阿里云服务器的工具，例如终端、**Workbench（推荐）** 或其他 SSH 客户端。
@@ -41,7 +41,7 @@
    在阿里云服务器中，使用 `wget` 命令下载 **本项目** 压缩包：
 
    ```bash
-   wget https://github.com/Summer-Neko/Neko-Dictation/releases/download/Neko-Dictation/Neko-Dictation.V1.0.zip
+   wget https://github.com/Summer-Neko/Neko-Dictation/releases/download/Neko-Dictationv1.0/Neko-DictationV1.0.zip
    ```
 
 3. **安装 `unzip`（如果还没有安装）**：
