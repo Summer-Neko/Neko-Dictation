@@ -11,7 +11,7 @@ import os
 # 打卡系统
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
-from flask import redirect, url_for
+from flask import redirect, url_for, send_from_directory
 import uuid
 
 from flask import flash, session
@@ -37,7 +37,7 @@ app.config['SESSION_USE_SIGNER'] = True
 app.config['SESSION_PERMANENT'] = True  # 默认情况下会话为永久会话
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)  # 设置默认会话时间为7天
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///schedules.db'
-app.config['UPLOAD_FOLDER'] = 'static/uploads'
+app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
 Session(app)
 
@@ -177,6 +177,13 @@ def create_schedule():
     return render_template('create_schedule.html', schedules=schedules)
 
 
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+
+
 @app.route('/upload_photos/<int:task_id>', methods=['POST'])
 def upload_photos(task_id):
     task = Task.query.get(task_id)
@@ -270,7 +277,7 @@ def load_config():
     config = {
         'HOST': '127.0.0.1',
         'PORT': 5000,
-        'DEBUG': True
+        'DEBUG': False
     }
     if os.path.exists('config.txt'):
         with open('config.txt', 'r') as f:
@@ -1022,4 +1029,5 @@ def generate_overview_data(scores, targets):
 
 if __name__ == '__main__':
     create_tables()  # 创建数据库表
+    os.environ['FLASK_ENV'] = 'production'
     app.run(host=config['HOST'], port=config['PORT'], debug=config['DEBUG'])

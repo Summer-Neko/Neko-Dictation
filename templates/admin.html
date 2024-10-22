@@ -65,7 +65,7 @@
                         <p>{{ loop.index }}. {{ task.content }}{% if task.completed_at %} - 完成时间是 {{ task.completed_at.strftime('%Y-%m-%d %H:%M:%S') }} 喵{% endif %}</p>
                         <div class="photo-container">
                             {% for photo in task.photos %}
-                            <img data-src="{{ url_for('static', filename='uploads/' ~ photo.filename) }}" alt="Photo" class="lazy" onclick="viewPhoto(this)">
+                            <img data-src="{{ url_for('uploaded_file', filename=photo.filename) }}" alt="Photo" class="lazy" onclick="viewPhoto(this)">
                             {% endfor %}
                         </div>
                     </li>

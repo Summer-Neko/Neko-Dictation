@@ -50,7 +50,7 @@
                                 {% endif %}
                                 {% for photo in task.photos %}
                                     <div class="photo-item">
-                                        <img data-src="{{ url_for('static', filename='uploads/' ~ photo.filename) }}" alt="Photo" class="lazy" onclick="viewPhoto(this)">
+                                        <img data-src="{{ url_for('uploaded_file', filename=photo.filename) }}" alt="Photo" class="lazy" onclick="viewPhoto(this)">
                                         {% if not schedule.is_locked %}
                                         <form action="{{ url_for('delete_photo', photo_id=photo.id) }}" method="post">
                                             <button type="submit" class="delete-button">删除照片</button>
